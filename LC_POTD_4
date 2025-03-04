@@ -1,0 +1,31 @@
+long long base = 3;
+long long MAX_VAL = 1e7;
+long long val = log(MAX_VAL)/log(base) + 2;
+set<long long> table;
+void tabulate(){
+    long long some = 1;
+    for(int i = 0;i <= val;i++){
+        table.insert(some);
+        some *= 3;
+    }
+}
+
+class Solution {
+public:
+    int old_val = 0;
+    bool check(int n){
+        if(n < 0) return false;
+        if(!n) return true;
+        auto it = table.upper_bound(n);
+        --it;
+        int new_val = *it;
+        if(new_val == old_val) return false;
+        old_val = new_val;
+        if(n < new_val) return false;
+        return check(n - new_val);
+    }
+    bool checkPowersOfThree(int n) {
+        tabulate();
+        return check(n);
+    }
+};
