@@ -1,1 +1,2 @@
-git add . && git commit -m "Commit" && git push && clear
+read message
+git add . && git commit -m "$message" && git push && clear
